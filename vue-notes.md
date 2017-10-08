@@ -902,3 +902,54 @@ new Vue({
 
 ### v-el获取dom对象
 
+````html
+    <div id="app">
+        <button @click="getData">获取dom对象</button>
+        <!--相当于定义一个名字-->
+        <div v-el:mydiv>一个div</div>
+    </div>
+````
+
+````javascript
+    new Vue({
+        el:"#app",
+        methods:{
+            getData:function(){
+                console.log(this.$els.mydiv);
+                this.$els.mydiv.innerText="修改内容"
+            }
+        }
+    })
+
+````
+
+### v-ref获取组件
+
+```html
+    <div id="app">
+        <button @click="getData">获取dom对象</button>
+        <!--相当于定义一个名字-->
+        <son v-ref:mydiv></son>
+    </div>
+```
+
+```javascript
+Vue.component('son',{
+  template:"<div>一个子组件</div>",
+  data:function(){
+    return{
+      message:'hello'
+    }
+  }
+})
+new Vue({
+  el:"#app",
+  methods:{
+    getdata:function(){
+      console.log(this.$refs.mydiv);
+      console.log(this.$refs.mydiv.$data.message);
+    }
+  }
+})
+```
+
